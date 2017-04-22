@@ -20,9 +20,15 @@ module.exports = function(app) {
 
 
     //add get and post routes for api
-    app.get("/api/waitlist", function(req, res) {
+    app.get("/api/dispwait", function(req, res) {
         console.log("Waitlist: ",waitlist);
         return res.json(waitlist);
+    });
+
+    app.get("/api/clear", function(req, res) {
+        tables = [];
+        waitlist = [];
+        return res.json(waitlist, tables);
     });
 
 // add to tables
@@ -36,8 +42,8 @@ module.exports = function(app) {
         res.json(newreservation);
     });
 
-    // add to tables
-    app.post("/api/wait", function(req, res) {
+    // add to waitlist
+    app.post("/api/addwait", function(req, res) {
         var newwait = req.body;
 
         console.log(newwait);
