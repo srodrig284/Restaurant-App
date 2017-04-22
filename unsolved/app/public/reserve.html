@@ -106,18 +106,32 @@
 
 		// Here we get the location of the root page.
 		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+		var dataBool = true;
 		var currentURL = window.location.origin;
+		var resoption = '';
+		$.ajax({url: currentURL + "/api/dispwait", method: "GET"})
+			.done(function(waitlistData) {
+				if(waitlistData.length === 5) {
+					resoption = "/api/addwait";
+					dataBool = false;
+				}
+				else
+				{
+					resoption = "/api/reserve";
+				}
+			});
 
-	    $.post(currentURL + "/api/reserve", newReservation,
+
+	    $.post(currentURL + resoption, newReservation,
 	    function(data){
-
+	    	console.log('DATA = ', data);
 	    	// If a table is available... tell user they are booked.
-	    	if(data == true){
-	    		alert("Yay! You are officially booked!")
+	    	if(dataBool === true){
+	    		alert("Yay! You are officially booked!");
 	    	}
 
 	    	// If a table is available... tell user they on the waiting list.
-	    	if(data == false){
+	    	else {
 	    		alert("Sorry you are on the wait list")
 	    	}
 
