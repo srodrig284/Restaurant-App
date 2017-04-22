@@ -102,7 +102,7 @@
 
 
 					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].id + "</h2>");
 				}
 			});
 	}
@@ -114,12 +114,12 @@
 		var currentURL = window.location.origin;
 
 		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-		$.ajax({url: currentURL + "/api/waitlist", method: "GET"})
+		$.ajax({url: currentURL + "/api/dispwait", method: "GET"})
 			.done(function(waitlistData) {
 
 				// Here we are logging the URL so we have access to it for troubleshooting
 				console.log("------------------------------------");
-				console.log("URL: " + currentURL + "/api/waitlist");
+				console.log("URL: " + currentURL + "/api/dispwait");
 				console.log("------------------------------------");
 
 				// Here we then log the NYTData to console, where it will show up as an object.
@@ -138,7 +138,7 @@
 					var tableNumber = i + 1;
 
 					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerID + "</h2>");
+					$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].id + "</h2>");
 				}
 			});
 	}
@@ -147,7 +147,7 @@
 	function clearTable(){
 
 		var currentURL = window.location.origin;
-		$.ajax({url: currentURL + "/api/clear", method: "POST"})
+		$.ajax({url: currentURL + "/api/clear", method: "GET"})
 
 	}
 
