@@ -26,8 +26,7 @@ module.exports = function(app) {
     });
 
     app.get("/api/clear", function(req, res) {
-        tables = [];
-        waitlist = [];
+   
         return res.json(waitlist, tables);
     });
 
