@@ -86,8 +86,7 @@
 	// In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
 	// Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
 	// In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
-
-	$(".submit").on("click", function(){
+$(".submit").on("click", function(){
 
 		// Here we grab the form elements
 		var newReservation = {
@@ -96,8 +95,6 @@
 			email: $('#reserve_email').val().trim(),
 			id: $('#reserve_uniqueID').val().trim()
 		};
-
-		console.log(newReservation);
 
 		// This line is the magic. It's very similar to the standard ajax function we used.
 		// Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
@@ -109,18 +106,17 @@
 		// var dataBool = true;
 		var currentURL = window.location.origin;
 
-
-	    $.post(currentURL + resoption, newReservation,
-	    function(data){
-	    	console.log(resoption);
+	    $.post(currentURL + "/api/reserve", newReservation).done(function(data){
 	    	// If a table is available... tell user they are booked.
+			console.log("got here");
 	    	if(data === true){
 	    		alert("Yay! You are officially booked!");
 	    	}
 
 	    	// If a table is available... tell user they on the waiting list.
-	    	else {
-	    		alert("Sorry you are on the wait list")
+	    	else
+			{
+	    		alert("Sorry you are on the wait list");
 	    	}
 
 	    	// Clear the form when submitting

@@ -14,14 +14,14 @@ module.exports = function(app) {
 
 	//add get and post routes for api
     app.get("/api/tables", function(req, res) {
-        console.log("Reservations: ",tables);
+       // console.log("Reservations: ",tables);
         return res.json(tables);
     });
 
 
     //add get and post routes for api
     app.get("/api/dispwait", function(req, res) {
-        console.log("Waitlist: ",waitlist);
+      //  console.log("Waitlist: ",waitlist);
         return res.json(waitlist);
     });
 
@@ -33,24 +33,16 @@ module.exports = function(app) {
 
 // add to tables
     app.post("/api/reserve", function(req, res) {
-        var newreservation = req.body;
 
-        console.log(newreservation);
-
-        tables.push(newreservation);
-
-        res.json(newreservation);
+        if(tables.length < 5)
+        {
+            tables.push(req.body);
+            res.json(true);
+        }
+        else
+        {
+            waitlist.push(req.body);
+            res.json(false);
+        }
     });
-
-    // add to waitlist
-    app.post("/api/addwait", function(req, res) {
-        var newwait = req.body;
-
-        console.log(newwait);
-
-        waitlist.push(newwait);
-
-        res.json(newwait);
-    });
-
 };
